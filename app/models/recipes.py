@@ -2,8 +2,9 @@ from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
 import uuid
+from db.session import Base
 
-class Recipe():
+class Recipe(Base):
     __tablename__ = "recipes"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
