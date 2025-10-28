@@ -5,6 +5,11 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from app.db.session import Base
+from app.models.recipes import Recipe
+from app.models.users import User
+
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -18,7 +23,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -31,7 +36,7 @@ def run_migrations_offline() -> None:
 
     This configures the context with just a URL
     and not an Engine, though an Engine is acceptable
-    here as well.  By skipping the Engine creation
+    here as well.  By skipping the Engine creation 
     we don't even need a DBAPI to be available.
 
     Calls to context.execute() here emit the given string to the

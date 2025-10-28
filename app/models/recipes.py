@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
 import uuid
-from db.session import Base
+from app.db.session import Base
 
 class Recipe(Base):
     __tablename__ = "recipes"
