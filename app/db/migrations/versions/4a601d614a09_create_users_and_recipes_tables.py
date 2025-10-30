@@ -1,8 +1,8 @@
 """Create users and recipes tables
 
-Revision ID: ec336a2a5cd1
+Revision ID: 4a601d614a09
 Revises: 
-Create Date: 2025-10-30 14:04:02.187873
+Create Date: 2025-10-30 14:32:30.314128
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = 'ec336a2a5cd1'
+revision: str = '4a601d614a09'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -34,7 +34,7 @@ def upgrade() -> None:
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('indexes for username and email', 'users', [], unique=False, postgresql_include=['username', 'email'])
+    op.create_index('indexes for username and email', 'users', ['id'], unique=False, postgresql_include=['username', 'email'])
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
     op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
     op.create_index(op.f('ix_users_username'), 'users', ['username'], unique=True)
@@ -55,7 +55,7 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index('include indexes for title, category and user_id', 'recipes', [], unique=False, postgresql_include=['title', 'category', 'user_id'])
+    op.create_index('include indexes for title, category and user_id', 'recipes', ['id'], unique=False, postgresql_include=['title', 'category', 'user_id'])
     op.create_index(op.f('ix_recipes_category'), 'recipes', ['category'], unique=False)
     op.create_index(op.f('ix_recipes_id'), 'recipes', ['id'], unique=False)
     op.create_index(op.f('ix_recipes_title'), 'recipes', ['title'], unique=False)

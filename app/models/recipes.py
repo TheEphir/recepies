@@ -23,7 +23,8 @@ class Recipe(Base):
 
     __table_args__ = (
         Index(
-            name="include indexes for title, category and user_id",
+            "include indexes for title, category and user_id",
+            "id",
             postgresql_include=["title", "category", "user_id"] # making indexes
         ),
     )

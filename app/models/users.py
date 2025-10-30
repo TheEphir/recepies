@@ -20,7 +20,8 @@ class User(Base):
 
     __table_args__ = (
         Index(
-            name="indexes for username and email",
+            "indexes for username and email",
+            "id",
             postgresql_include = ["username", "email"] #
         ),
     )
