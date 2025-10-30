@@ -1,8 +1,8 @@
-from db.session import Base
 import uuid
-from sqlalchemy import Column, String, Boolean, DateTime
+from sqlalchemy import Column, String, Boolean, DateTime, Index
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
+from app.db.session import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -19,5 +19,8 @@ class User(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=True)
 
     __table_args__ = (
-        {"postgresql_include": ["username", "email"]} #
+        Index(
+            name="indexes for username and email",
+            postgresql_include = ["username", "email"] #
+        ),
     )

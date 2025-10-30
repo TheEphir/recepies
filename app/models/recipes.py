@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey, Index
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
 import uuid
@@ -22,5 +22,8 @@ class Recipe(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=True)
 
     __table_args__ = (
-        {"postgresql_include": ["title", "category", "user_id"]} # making indexes
+        Index(
+            name="include indexes for title, category and user_id",
+            postgresql_include=["title", "category", "user_id"] # making indexes
+        ),
     )
